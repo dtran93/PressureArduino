@@ -34,11 +34,12 @@
 		// } else {
 		// 	$('#text1').html("No need to order , Weight: " + pollOneH);	
 		// }
-		if (pollOneH < 5) {
-			$('#toiletpaperamount').html(10);	
-		} else {
-			$('#toiletpaperamount').html(0);	
-		}
+		$('#toiletpaperamount').html(parseInt(10 - pollOneH / 20 * 10));
+		// if (pollOneH < 5) {
+		// 	$('#toiletpaperamount').html(10);	
+		// } else {
+		// 	$('#toiletpaperamount').html(0);	
+		// }
 		
 		
 

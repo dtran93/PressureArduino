@@ -17,7 +17,9 @@ void setup()
   float voltage = sensorValue * (20.0 / 1023.0);
   
   // Print out the value you read:
-  Serial.println(voltage);
+//  Serial.print("B");
+  String x = "B" + voltage +"E";
+  Serial.println(x);
   
   // Wait 100 milliseconds
   delay(1000);

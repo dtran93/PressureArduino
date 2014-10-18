@@ -1,11 +1,67 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<head>    
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
+	<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+	<script src="/socket.io/socket.io.js"></script> 
+
+	<script>
+	// canvas request for all browsers
+	window.requestAnimFrame = (function(callback) {
+		return window.requestAnimationFrame || 
+		window.webkitRequestAnimationFrame || 
+		window.mozRequestAnimationFrame || 
+		window.oRequestAnimationFrame || 
+		window.msRequestAnimationFrame ||
+		function(callback) {
+        	window.setTimeout(callback, 1000 / 30); // 30 frames per second
+      	};
+  	})();
+
+	var iosocket;
+	var pollOneH = 0;
+	var pollTwoH = 0;
+	var pollThreeH = 0;
+	var pollFourH = 0;
+
+	function animation() {
+		$('#text1').html(pollOneH);
+
+		 //  // request new frame
+		 requestAnimFrame(function() {
+		 	animation(poll1,text);
+		 });
+		}
+
+		function initSocketIO() {
+			iosocket = io.connect();
+			iosocket.on('onconnection', function(value) {
+				pollOneH = value.pollOneValue/2; // recieve start poll value from server
+				initPoll();
+
+				// recieve changed values by other client from server
+				iosocket.on('updateData', function (recievedData) {
+					console.log(recievedData);
+					pollOneH = recievedData;
+				});
+			});
+		}
+
+		function initPoll() {
+			poll1 = {}
+			text = {}
+			animation(poll1,text);
+		}
+
+		window.onload = function() {
+			initSocketIO();
+		};
+
+		</script>
+	</head>
+	<body>
+	<p id="text1">Here</p>
+	</body>
+	</html>

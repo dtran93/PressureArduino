@@ -1,0 +1,6 @@
+{
+  "Username": dtran93,
+  "Password": abcde,
+  "ProductQuantity": 2,
+  "AmazonToken": cxj9uc932kx9832j3n921jx20j32d320dh97d1d
+}

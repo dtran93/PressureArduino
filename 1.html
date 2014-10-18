@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+	window.onload
+		var ajax = new XMLHttpRequest();
+		ajax.onload = getresponse;
+		ajax.open("GET", "https://sts.amazonaws.com/?Version=2011-06-15&Action=GetSessionToken&DurationSeconds=3600&SerialNumber=YourMFADeviceSerialNumber&TokenCode=123456&AUTHPARAMS", true);
+		ajax.send();
+
+	function getresponse(){
+		if (this.status == 200) { // request successful
+			console.log(this.responseText);
+		} else { // request failed
+			error(this);
+		}
+	}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

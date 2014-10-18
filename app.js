@@ -73,7 +73,7 @@ initSocketIO(server);
 function initSocketIO(httpServer) {
     socketServer = socketio.listen(httpServer);
     socketServer.on('connection', function (socket) {
-        console.log("user connected");
+        // console.log("user connected");
         socket.emit('onconnection', {pollOneValue:sendData});
         socketServer.on('update', function(data) {
             socket.emit('updateData',{pollOneValue:data});

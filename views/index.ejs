@@ -21,13 +21,14 @@
   	})();
 
 	var iosocket;
-	var pollOneH = 0;
-	var pollTwoH = 0;
-	var pollThreeH = 0;
-	var pollFourH = 0;
+	var pollOneH = 0.0;
 
 	function animation() {
-		$('#text1').html(pollOneH);
+		if(pollOneH < 10.0) {
+			$('#text1').html("Order Toilet Paper , Weight: " + pollOneH);	
+		} else {
+			$('#text1').html("No need to order , Weight: " + pollOneH);	
+		}
 
 		 //  // request new frame
 		 requestAnimFrame(function() {
@@ -38,13 +39,12 @@
 		function initSocketIO() {
 			iosocket = io.connect();
 			iosocket.on('onconnection', function(value) {
-				pollOneH = value.pollOneValue/2; // recieve start poll value from server
 				initPoll();
 
 				// recieve changed values by other client from server
 				iosocket.on('updateData', function (recievedData) {
+					pollOneH = recievedData.pollOneValue;
 					console.log(recievedData);
-					pollOneH = recievedData;
 				});
 			});
 		}
@@ -62,6 +62,6 @@
 		</script>
 	</head>
 	<body>
-	<p id="text1">Here</p>
+		<p id="text1">Here</p>
 	</body>
 	</html>
